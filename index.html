@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NicoLab | Home lab, networking, security and flow mapping</title>
+  <meta name="description" content="NicoLab documents Nicola's home lab architecture, flow mapping, runbooks, security baseline and technical decisions.">
+  <meta name="author" content="Nicola Coca">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="NicoLab | Home lab and technical documentation">
+  <meta property="og:description" content="A structured place to publish services, networking flows, mapping, security, runbooks and lessons learned from the lab.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/logo.svg">
+  <meta name="theme-color" content="#111418">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav wrap" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="NicoLab home">
+        <img src="assets/logo.svg" alt="Logo NicoLab">
+        <span>NicoLab</span>
+      </a>
+      <div class="links" id="navLinks">
+        <a href="#lab">Lab</a>
+        <a href="#flows">Flow</a>
+        <a href="#security">Security</a>
+        <a href="#docs">Docs</a>
+      </div>
+      <div class="actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Change theme" title="Theme">◐</button>
+        <button class="icon-btn menu" id="menuToggle" type="button" aria-label="Open menu" title="Menu">☰</button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Home lab journal</p>
+          <h1>NicoLab documents how I build, secure and evolve my lab.</h1>
+          <p class="lead">Networking, reverse proxy, storage, media, automation, security baseline, technical decisions and flow mapping: everything in one readable, maintainable and publishable place.</p>
+          <div class="cta-row">
+            <a class="btn" href="#docs">Open documentation</a>
+            <a class="btn secondary" href="#flows">View flows</a>
+          </div>
+          <div class="signal-row" aria-label="Project status">
+            <div><strong>01</strong><span>Inventory-first</span></div>
+            <div><strong>02</strong><span>Flow mapping</span></div>
+            <div><strong>03</strong><span>Security notes</span></div>
+          </div>
+        </div>
+        <div class="lab-map reveal" aria-label="Visual home lab map">
+          <div class="map-grid"></div>
+          <div class="zone internet">Internet</div>
+          <div class="zone edge">Cloudflare<br><span>DNS, TLS, WAF</span></div>
+          <div class="zone proxy">Reverse Proxy<br><span>internal routing</span></div>
+          <div class="zone services">Services<br><span>Jellyfin, Immich, Navidrome</span></div>
+          <div class="zone storage">Storage<br><span>Synology, backups</span></div>
+          <div class="zone observe">Monitoring<br><span>logs, uptime, alerts</span></div>
+          <div class="trace trace-one"></div>
+          <div class="trace trace-two"></div>
+          <div class="trace trace-three"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="lab">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">Inventory</p>
+          <h2>Every service has a purpose, an owner, a risk level and a procedure.</h2>
+          <p class="lead">This site treats the home lab like a real system, not a messy list of containers. It tracks components, dependencies, public exposure and operational notes.</p>
+        </div>
+        <div class="toolbar reveal" aria-label="Filter services">
+          <button class="filter active" type="button" data-filter="all">All</button>
+          <button class="filter" type="button" data-filter="public">Public</button>
+          <button class="filter" type="button" data-filter="private">Private</button>
+          <button class="filter" type="button" data-filter="lab">Lab</button>
+        </div>
+        <div class="service-grid" id="serviceGrid">
+          <article class="service reveal" data-type="public"><span class="badge public">Public</span><h3>Reverse Proxy</h3><p>Controlled entry point for published services, with TLS, hostname routing and basic hardening rules.</p><dl><dt>Risk</dt><dd>High</dd><dt>Doc</dt><dd>docs/networking.md</dd></dl></article>
+          <article class="service reveal" data-type="public"><span class="badge public">Public</span><h3>Immich / Photos</h3><p>Self-hosted photo archive, separated from internal systems and documented for backups and access.</p><dl><dt>Risk</dt><dd>Medium</dd><dt>Doc</dt><dd>docs/runbook.md</dd></dl></article>
+          <article class="service reveal" data-type="private"><span class="badge private">Private</span><h3>Synology DSM</h3><p>Storage, snapshots, users, permissions and backups. Restricted access and treated as a critical asset.</p><dl><dt>Risk</dt><dd>High</dd><dt>Doc</dt><dd>docs/security.md</dd></dl></article>
+          <article class="service reveal" data-type="public"><span class="badge public">Public</span><h3>Jellyfin</h3><p>Personal media streaming with notes about exposure, resources, users and updates.</p><dl><dt>Risk</dt><dd>Medium</dd><dt>Doc</dt><dd>docs/services.md</dd></dl></article>
+          <article class="service reveal" data-type="public"><span class="badge public">Public</span><h3>Navidrome</h3><p>Self-hosted music, private library and access flows separated from the rest of the lab.</p><dl><dt>Risk</dt><dd>Medium</dd><dt>Doc</dt><dd>docs/services.md</dd></dl></article>
+          <article class="service reveal" data-type="lab"><span class="badge lab">Lab</span><h3>J.A.R.V.I.S.</h3><p>Experimental space for automation, personal assistants, integrations and smart home control.</p><dl><dt>Risk</dt><dd>Variable</dd><dt>Doc</dt><dd>docs/roadmap.md</dd></dl></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contrast" id="flows"><div class="wrap flow-layout"><div class="reveal"><p class="eyebrow">Flow mapping</p><h2>Understand the path first. Then decide what deserves exposure.</h2><p class="lead">Each flow explains where traffic enters, which controls it crosses, which service it reaches, and what logs or backups are needed when something breaks.</p></div><div class="flow-board reveal"><div class="flow-step"><span>Client</span><strong>Browser or mobile app</strong></div><div class="flow-arrow"></div><div class="flow-step"><span>Edge</span><strong>Cloudflare, DNS, TLS</strong></div><div class="flow-arrow"></div><div class="flow-step"><span>Gateway</span><strong>Reverse proxy</strong></div><div class="flow-arrow"></div><div class="flow-step"><span>Service</span><strong>Container or NAS</strong></div><div class="flow-arrow"></div><div class="flow-step"><span>Ops</span><strong>Log, backup, alert</strong></div></div></div></section>
+
+    <section class="section" id="security"><div class="wrap"><div class="section-head reveal"><p class="eyebrow">Security baseline</p><h2>A simple checklist, serious enough to prevent chaos.</h2></div><div class="check-grid"><article class="check reveal"><span>✓</span><h3>Asset inventory</h3><p>Services, ports, domains, handled data, owner and operating status.</p></article><article class="check reveal"><span>✓</span><h3>Least privilege</h3><p>Separate accounts, minimum access, MFA where possible and a password manager.</p></article><article class="check reveal"><span>✓</span><h3>Patch rhythm</h3><p>A routine for updates, rollback and change notes.</p></article><article class="check reveal"><span>✓</span><h3>Backup proof</h3><p>Having backups is not enough: restore testing needs to be tracked.</p></article><article class="check reveal"><span>✓</span><h3>Exposure review</h3><p>Every public service needs a reason and protection in front of it.</p></article><article class="check reveal"><span>✓</span><h3>Incident notes</h3><p>Short runbooks for what to do when a service does not respond.</p></article></div></div></section>
+
+    <section class="section" id="docs"><div class="wrap docs-layout"><div class="reveal"><p class="eyebrow">Repository content</p><h2>The documentation grows like the lab: small, useful and versioned.</h2><p class="lead">The included Markdown files are the base for publishing decisions, procedures and mappings. Screenshots, Mermaid diagrams and changelogs can be added without changing the site structure.</p></div><div class="doc-list reveal"><a href="docs/architecture.md"><strong>Architecture</strong><span>topology, domains, components</span></a><a href="docs/networking.md"><strong>Networking</strong><span>DNS, proxy, VLANs, flows</span></a><a href="docs/security.md"><strong>Security</strong><span>baseline, access, backups</span></a><a href="docs/runbook.md"><strong>Runbook</strong><span>incidents, updates, restore</span></a><a href="docs/roadmap.md"><strong>Roadmap</strong><span>ideas, backlog, experiments</span></a></div></div></section>
+  </main>
+
+  <footer class="footer"><div class="wrap footer-inner"><span>NicoLab · iTarock · 2026</span><a href="https://github.com/iTarock/NicoLab" target="_blank" rel="noopener">GitHub</a></div></footer>
+  <script src="script.js"></script>
+</body>
+</html>
