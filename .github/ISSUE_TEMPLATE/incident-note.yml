@@ -1,0 +1,27 @@
+name: Incident note
+description: Record a public-safe incident or lesson learned.
+title: "incident: "
+labels:
+  - incident
+body:
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact
+      description: What was affected?
+    validations:
+      required: true
+  - type: textarea
+    id: timeline
+    attributes:
+      label: Timeline
+      description: Public-safe timeline of events.
+    validations:
+      required: true
+  - type: textarea
+    id: prevention
+    attributes:
+      label: Prevention
+      description: What should change?
+    validations:
+      required: true
