@@ -1,0 +1,42 @@
+services:
+  - name: Reverse Proxy
+    exposure: public
+    purpose: Route public hostnames to internal services.
+    risk: high
+    owner: iTarock
+    public_url: https://service.example.com
+    internal_target: REDACTED
+    data_classification: operational
+    backup_required: false
+    logs:
+      access: true
+      error: true
+    runbook: docs/runbooks/reverse-proxy.md
+
+  - name: Immich
+    exposure: public
+    purpose: Private photo backup and browsing.
+    risk: medium
+    owner: iTarock
+    public_url: https://photos.example.com
+    internal_target: REDACTED
+    data_classification: personal
+    backup_required: true
+    logs:
+      access: true
+      error: true
+    runbook: docs/runbook.md
+
+  - name: Synology DSM
+    exposure: private
+    purpose: Storage management and backups.
+    risk: high
+    owner: iTarock
+    public_url: null
+    internal_target: REDACTED
+    data_classification: critical
+    backup_required: true
+    logs:
+      access: true
+      error: true
+    runbook: docs/runbook.md
