@@ -1,0 +1,28 @@
+name: Documentation improvement
+description: Suggest clearer, safer or more useful documentation.
+title: "docs: "
+labels:
+  - documentation
+body:
+  - type: textarea
+    id: area
+    attributes:
+      label: Area
+      description: Which page or section should be improved?
+      placeholder: docs/networking.md, README.md, flow mapping, runbooks...
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggestion
+      description: What should change?
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety
+      options:
+        - label: This suggestion does not include secrets or sensitive infrastructure details.
+          required: true
