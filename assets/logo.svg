@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">NicoLab</title>
+  <desc id="desc">NicoLab mark for iTarock home lab documentation.</desc>
+  <rect width="512" height="512" rx="112" fill="#111418"/>
+  <path d="M112 148h288v216H112z" fill="none" stroke="#5fd3b3" stroke-width="18"/>
+  <path d="M156 320V192h36l58 82V192h40v128h-36l-58-82v82h-40z" fill="#f4f7fb"/>
+  <path d="M336 192h40v128h-40z" fill="#f0b45b"/>
+  <path d="M122 384h268" stroke="#7bb7ff" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="390" cy="384" r="18" fill="#ff6b6b"/>
+</svg>
