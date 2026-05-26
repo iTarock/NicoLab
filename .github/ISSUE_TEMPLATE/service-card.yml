@@ -1,0 +1,30 @@
+name: Service card
+description: Propose or update a public-safe service entry.
+title: "service: "
+labels:
+  - service
+body:
+  - type: input
+    id: service
+    attributes:
+      label: Service name
+      placeholder: Immich, Jellyfin, reverse proxy...
+    validations:
+      required: true
+  - type: dropdown
+    id: exposure
+    attributes:
+      label: Exposure
+      options:
+        - Public
+        - Private
+        - Lab
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Public-safe description
+      description: Explain the service without exposing sensitive details.
+    validations:
+      required: true
