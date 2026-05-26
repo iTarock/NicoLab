@@ -1,0 +1,44 @@
+name: Repository Health
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate public site and docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check required files
+        run: |
+          test -f README.md
+          test -f LICENSE
+          test -f SECURITY.md
+          test -f CONTRIBUTING.md
+          test -f index.html
+          test -f docs/architecture.md
+          test -f docs/networking.md
+          test -f docs/security.md
+          test -f docs/services.md
+          test -f docs/runbook.md
+          test -f docs/roadmap.md
+
+      - name: Guard against obvious secrets
+        run: |
+          ! grep -RInE "(BEGIN RSA PRIVATE KEY|BEGIN OPENSSH PRIVATE KEY|ghp_[A-Za-z0-9_]+|api[_-]?key\s*=|password\s*=)" . \
+            --exclude-dir=.git \
+            --exclude=validate.yml
+
+      - name: Check public site references
+        run: |
+          grep -q "NicoLab" index.html
+          grep -q "iTarock/NicoLab" README.md
+          grep -q "docs/architecture.md" index.html
